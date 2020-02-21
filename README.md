@@ -1,8 +1,8 @@
-# Turn [![Build Status](https://travis-ci.org/tagniam/Turn.svg?branch=master)](https://travis-ci.org/tagniam/Turn)
+# Turn
 Turn is a basic turn-based RPG game written in C++. 
 
 ## History
-I wrote this game almost 5 years ago, and uploading it to GitHub was my first experience with open source. During [Hacktoberfest 2017](https://hacktoberfest.digitalocean.com/), I wanted to give back to the community and encouraged everyone, regardless of programming skills, to contribute. Thank you to all the amazing contributors and see you next year!
+This program was originally written back in 2015 by tagniam. This project was then forked by Jonathan Confer and Hayden Richter for a project in their Intro to Software Engineering class in Spring 2020 at Wright State University. 
 
 ## Screenshots
 
@@ -23,16 +23,16 @@ See the [wiki](https://github.com/tagniam/Turn/wiki) for instructions.
 
 #### Linux & Mac
 ```shell
-$ git clone https://github.com/tagniam/Turn.git
+$ git clone https://github.com/SenatorConfer/Turn.git
 $ cd Turn/
 $ ./configure
-$ cd build/
-$ make
 ```
+
+Run Turn.sln in Visual Studios and Build the project.
 
 Make sure you run the executable from the `Turn` directory so the in-game sounds can work:
 ```shell
-$ ./build/Turn  # play the game!
+$ ./build/Turn/debug/Turn  # play the game!
 ```
 
 ## Contributing
