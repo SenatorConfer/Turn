@@ -2,7 +2,7 @@
 
 ## Overview
 
-This is the intended features list that will be implemented within the Fall 2019 Semester.
+This is the intended features list that will be implemented within the Spring 2020 Semester.
 
 ### List:
 
