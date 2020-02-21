@@ -2,7 +2,7 @@
 Turn is a basic turn-based RPG game written in C++. 
 
 ## History
-This program was originally written back in 2015 by tagniam. This project was then forked by Jonathan Confer and Hayden Richter for a project in their Intro to Software Engineering class in Spring 2020 at Wright State University. 
+This program was originally written back in 2013 by tagniam. This project was then forked by Jonathan Confer and Hayden Richter for a project in their Intro to Software Engineering class in Spring 2020 at Wright State University. 
 
 ## Screenshots
 
