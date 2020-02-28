@@ -24,25 +24,66 @@ int Enemy::Action(){
     // Returns damage hit for the player. Uses random number to select enemy's move.
 
   int selector = rand()%9;
-    switch(selector){
-        case 0: case 1:
-            // 2/9 chance of risk attacking.
-            return RiskAttack();
-            break;
-        case 2: case 3:
-            // 2/9 chance of healing.
-            Heal();
-            return 0;
-            break;
-        case 4: case 5: case 6: case 7: case 8:
-            // 5/9 chance of generically attacking.
-            return GenericAttack();
-            break;
-        default:
-            // Returns 0 damage in case selector goes wrong.
-            return 0;
-            break;
-    }
+
+  if (health < 50) {
+      switch (selector) {
+      case 0: case 1: case 2: 
+          // 3/9 chance of risk attacking.
+          return RiskAttack();
+          break;
+      case 3: case 4: case 5: case 6:
+          // 4/9 chance of healing.
+          Heal();
+          return 0;
+          break;
+      case 7: case 8:
+          // 2/9 chance of generically attacking.
+          return GenericAttack();
+          break;
+      default:
+          // Returns 0 damage in case selector goes wrong.
+          return 0;
+          break;
+      }
+   }
+  else if(health >= 100) {
+      switch (selector) {
+      case 0: case 1: case 2:
+          // 3/9 chance of risk attacking.
+          return RiskAttack();
+          break;
+      case 3: case 4: case 5: case 6: case 7: case 8:
+          // 6/9 chance of generically attacking.
+          return GenericAttack();
+          break;
+      default:
+          // Returns 0 damage in case selector goes wrong.
+          return 0;
+          break;
+      }
+  }
+  else {
+      switch (selector) {
+      case 0: case 1:
+          // 2/9 chance of risk attacking.
+          return RiskAttack();
+          break;
+      case 2: case 3:
+          // 2/9 chance of healing.
+          Heal();
+          return 0;
+          break;
+      case 4: case 5: case 6: case 7: case 8:
+          // 5/9 chance of generically attacking.
+          return GenericAttack();
+          break;
+      default:
+          // Returns 0 damage in case selector goes wrong.
+          return 0;
+          break;
+      }
+  }
+    
 }
 
 void Enemy::DisplayHUD(){
