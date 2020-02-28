@@ -27,17 +27,17 @@ int Enemy::Action(){
 
   if (health < 50) {
       switch (selector) {
-      case 0:
-          // 1/9 chance of risk attacking.
+      case 0: case 1: case 2: 
+          // 3/9 chance of risk attacking.
           return RiskAttack();
           break;
-      case 1: case 2: case 3: case 4:
+      case 3: case 4: case 5: case 6:
           // 4/9 chance of healing.
           Heal();
           return 0;
           break;
-      case 5: case 6: case 7: case 8:
-          // 4/9 chance of generically attacking.
+      case 7: case 8:
+          // 2/9 chance of generically attacking.
           return GenericAttack();
           break;
       default:
