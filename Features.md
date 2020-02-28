@@ -21,3 +21,9 @@ Entity Images
 Custom Moves
 
 Using Items in Between Fights
+
+Defence rating
+
+Armor items
+
+Weedle Enemy Type
