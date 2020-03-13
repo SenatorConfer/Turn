@@ -253,7 +253,7 @@ void Player::AddStoreItemToInventory(int type) {
 	switch (type)
 	{
 	case ITEMTYPE::ARROWS:
-		arrows += 5;
+		++arrows;
 		break;
 	case ITEMTYPE::BOMB:
 		++bombs;
@@ -263,6 +263,24 @@ void Player::AddStoreItemToInventory(int type) {
 		break;
 	case ITEMTYPE::WHETSTONE:
 		++whetstones;
+		break;
+	}
+}
+
+void Player::RemoveStoreItemFromInventory(int type) {
+	switch (type)
+	{
+	case ITEMTYPE::ARROWS:
+		--arrows;
+		break;
+	case ITEMTYPE::BOMB:
+		--bombs;
+		break;
+	case ITEMTYPE::POTION:
+		--potions;
+		break;
+	case ITEMTYPE::WHETSTONE:
+		--whetstones;
 		break;
 	}
 }
@@ -378,6 +396,24 @@ void Player::DisplayInventory(){
 
 int Player::GetCoins() {
     return coins;
+}
+
+int Player::GetItem(int type) {
+	switch (type)
+	{
+	case ITEMTYPE::ARROWS:
+		return arrows;
+		break;
+	case ITEMTYPE::BOMB:
+		return bombs;
+		break;
+	case ITEMTYPE::POTION:
+		return potions;
+		break;
+	case ITEMTYPE::WHETSTONE:
+		return whetstones;
+		break;
+	}
 }
 
 int Player::GenericAttack(){

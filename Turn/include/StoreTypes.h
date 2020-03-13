@@ -1,0 +1,11 @@
+
+#ifndef STORETYPES_H_INCLUDED
+#define STORETYPES_H_INCLUDED
+
+enum STORETYPE
+{
+	BUY = 1,
+	SELL
+};
+
+#endif
