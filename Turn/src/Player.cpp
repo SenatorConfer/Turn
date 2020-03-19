@@ -88,11 +88,12 @@ int Player::Action(){
 	cout << "Choose your move:" << endl
 		<< "1) Attack" << endl
 		<< "2) Risk Attack" << endl
-		<< "3) Bow and Arrow" << endl
-		<< "4) Heal" << endl << endl
-		<< "5) Use Bomb" << endl
-		<< "6) Use Potion" << endl
-		<< "7) Use Whetstone" << endl
+		<< "3) Special Attack" << endl
+		<< "4) Bow and Arrow" << endl
+		<< "5) Heal" << endl << endl
+		<< "6) Use Bomb" << endl
+		<< "7) Use Potion" << endl
+		<< "8) Use Whetstone" << endl
 		<< "0) Get me out of here!" << endl << endl;
 
 	while (true) {
@@ -113,6 +114,11 @@ int Player::Action(){
 			PlayPrimaryAttack(damage);
 			return damage;
 		case 3:
+			// Player uses their special attack
+			damage = SpecialAttack();
+			PlayPrimaryAttack(damage);
+			return damage;
+		case 4:
 			// Player shoots their bow.
 			if (arrows > 0)
 			{
@@ -124,12 +130,12 @@ int Player::Action(){
 				Sleep(SLEEP_MS);
 				return SKIP_TURN;
 			}
-		case 4:
+		case 5:
 			// Player heals, no damage is done to enemy.
 			PlayHeal();
 			Heal();
 			return 0;
-		case 5:
+		case 6:
 			// Player throws a bomb.
 			// Does not execute if there are no bombs in the inventory.
 			if (bombs > 0)
@@ -138,7 +144,7 @@ int Player::Action(){
 				cout << "No bombs in the inventory!" << endl;
 				return SKIP_TURN;
 			}
-		case 6:
+		case 7:
 			// Player drinks a potion.
 			// Does not execute if there are no potions in the inventory.
 			if (potions > 0) {
@@ -148,7 +154,7 @@ int Player::Action(){
 				cout << "No potions in the inventory!" << endl;
 				return SKIP_TURN;
 			}
-		case 7:
+		case 8:
 			// Player sharpens their weapon with a whetstone.
 			// Does not execute if there are no whetstones in inventory.
 			// No damage is done to the enemy.
@@ -441,6 +447,27 @@ int Player::RiskAttack(){
     if (damage>0) WeakenWeapon(4);
     return damage;
 
+}
+
+int Player::SpecialAttack() {
+	int damage = ReturnDamage();
+	int damage2 = ReturnDamage();
+	int damage3 = damage + damage2;
+	DeductDamage(damage);
+	DeductDamage(damage2);
+	ColourPrint(name, Console::DarkGrey);
+	if (gender == 'M')
+		cout << " throws out a fury of blows! He deals ";
+	else
+		cout << " throws out a fury of blows! She deals ";
+	ColourPrint(to_string(damage), Console::Red);
+	cout << " and ";
+	ColourPrint(to_string(damage2), Console::Red);
+	cout << " damage points!" << endl;
+	if (damage > 0 || damage2 > 0) {
+		WeakenWeapon(2);
+	}
+	return damage3;
 }
 
 void Player::WeakenWeapon(int impact){
