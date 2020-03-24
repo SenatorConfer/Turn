@@ -47,3 +47,17 @@ Req. 4.0.1 (Jonathan): The game shall implement an armor system that reduces dam
 Req. 4.1 (Jonathan): The game shall implement an X-Attack System
 
 Req. 4.1.1 (Jonathan): The game shall implement an X-Attack System that increases the damage dealt from a Player for a brief time during battle
+
+### [User Story E](features.md "User Stories")
+
+Req. 5.0 (Hayden): The game shall include a "Metapod"-type enemy
+
+Req. 5.0.1 (Hayden): The "Metapod"-type enemy shall have a high defense but no attack
+
+### [User Story F](features.md "User Stories")
+
+Req. 6.0 (Jonathan): The game shall include a gradual enemy encounter system
+
+Req. 6.0.1 (Jonathan): The enemy encounter system shall have users battle enemies that are of a similar level to the Player
+
+Req. 6.1 (Jonathan): The game shall have certain enemies remain un-encounterable until the Player reaches a certain level
