@@ -2,7 +2,7 @@
 
 ## Functional Requirements
 
-### [User Story A](features.md "User Stories")
+### [User Story A](Features.md "User Stories")
 
 Req. 1.0 (Jonathan): The game shall include a store that allows users to purchase items
 
@@ -20,7 +20,7 @@ Req. 1.1.2 (Jonathan): The game shall include a store that allows users to sell 
 
 Req. 1.1.3 (Jonathan): The game shall not allow a user to sell an item if they do not have the necessary amount of item(s) to sell
 
-### [User Story B](features.md "User Stories")
+### [User Story B](Features.md "User Stories")
 
 Req: 2.0 (Hayden): The game shall implement intellgent AI enemies
 
@@ -28,7 +28,7 @@ Req: 2.0.1 (Hayden): The enemy AI shall not heal when at full health
 
 Req: 2.0.2 (Hayden): The enemy AI shall heal more frequently in battle when below 50% health
  
-### [User Story C](features.md "User Stories")
+### [User Story C](Features.md "User Stories")
 
 Req. 3.0 (Hayden): The game shall include multiple player classes
 
@@ -38,7 +38,7 @@ Req. 3.0.1.1 (Hayden): The special attack for the respective player class shall 
 
 Req. 3.1 (Hayden): The game shall include more player classes than the default class
 
-### [User Story D](features.md "User Stories")
+### [User Story D](Features.md "User Stories")
 
 Req. 4.0 (Jonathan): The game shall implement an armor system
 
@@ -48,13 +48,13 @@ Req. 4.1 (Jonathan): The game shall implement an X-Attack System
 
 Req. 4.1.1 (Jonathan): The game shall implement an X-Attack System that increases the damage dealt from a Player for a brief time during battle
 
-### [User Story E](features.md "User Stories")
+### [User Story E](Features.md "User Stories")
 
 Req. 5.0 (Hayden): The game shall include a "Metapod"-type enemy
 
 Req. 5.0.1 (Hayden): The "Metapod"-type enemy shall have a high defense but no attack
 
-### [User Story F](features.md "User Stories")
+### [User Story F](Features.md "User Stories")
 
 Req. 6.0 (Jonathan): The game shall include a gradual enemy encounter system
 
