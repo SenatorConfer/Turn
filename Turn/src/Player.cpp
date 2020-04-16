@@ -107,22 +107,33 @@ int Player::Action(){
 			// Player generically attacks.
 			damage = GenericAttack();
 			PlayPrimaryAttack(damage);
+			AddSpecial();
 			return damage;
 		case 2:
 			// Player takes a risk and attacks.
 			damage = RiskAttack();
 			PlayPrimaryAttack(damage);
+			AddSpecial();
 			return damage;
 		case 3:
 			// Player uses their special attack
-			damage = SpecialAttack();
-			PlayPrimaryAttack(damage);
-			return damage;
+			if (special >= 100) {
+				damage = SpecialAttack();
+				PlayPrimaryAttack(damage);
+				special = 0;
+				return damage;
+			}
+			else {
+				cout << "Your special attack is not charged!" << endl;
+				Sleep(SLEEP_MS);
+				return SKIP_TURN;
+			}
 		case 4:
 			// Player shoots their bow.
 			if (arrows > 0)
 			{
 				PlaySecondaryAttack();
+				AddSpecial();
 				return BowAndArrow();
 			}
 			else {
@@ -138,8 +149,10 @@ int Player::Action(){
 		case 6:
 			// Player throws a bomb.
 			// Does not execute if there are no bombs in the inventory.
-			if (bombs > 0)
+			if (bombs > 0) {
+				AddSpecial();
 				return UseBomb();
+			}
 			else {
 				cout << "No bombs in the inventory!" << endl;
 				return SKIP_TURN;
@@ -308,6 +321,40 @@ void Player::DisplayHUD(Enemy *_Enemy){
 	ColourPrint(_Enemy->GetName(), Console::DarkGrey);
 	cout << endl;
 	DisplayHealthBar();
+}
+
+void Player::DisplaySpecial() {
+	ColourPrint("Special Attack", Console::DarkGrey);
+	cout << endl;
+	DisplaySpecialBar();
+	cout << endl << endl;
+}
+
+void Player::DisplaySpecialBar() {
+	string specialBar = "        " + to_string(special);
+
+	for (int i = specialBar.length(); i < 20; i++)
+		specialBar += " ";
+
+	for (size_t i = 0; i < specialBar.length(); i++) {
+		string currentChar = "";
+		currentChar += specialBar.at(i);
+		if ((i + 1) * 10 <= (size_t)special * 2) {
+			ColourPrint(currentChar, Console::Background_Red);
+		}
+		else {
+			ColourPrint(currentChar, Console::Background_Grey);
+		}
+	}
+}
+
+void Player::AddSpecial() {
+	if (special == 100) {
+		special == 100;
+	}
+	else {
+		special += 25;
+	}
 }
 
 void Player::ReplenishHealth(){
