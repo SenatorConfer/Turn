@@ -350,7 +350,7 @@ void Player::DisplaySpecialBar() {
 
 void Player::AddSpecial() {
 	if (special == 100) {
-		special == 100;
+		special = 100;
 	}
 	else {
 		special += 25;
