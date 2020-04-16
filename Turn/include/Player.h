@@ -18,6 +18,9 @@ class Player : public Entity, public SoundMaker {
 	void AddStoreItemToInventory(int);
     void RemoveStoreItemFromInventory(int);
         void DisplayHUD(Enemy*);
+        void DisplaySpecialBar();
+        void DisplaySpecial();
+        void AddSpecial();
         void ReplenishHealth();
 
         void AddExperience(int);
@@ -52,6 +55,7 @@ class Player : public Entity, public SoundMaker {
 
 	int player_type;
         int level;
+        int special = 0;
         char gender;
 	int experience;
         int whetstones;

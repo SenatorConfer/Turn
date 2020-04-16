@@ -364,6 +364,7 @@ void Game::Battle(){
         // name. Explained more in _Player->DisplayHealthBar().
         _Player->DisplayHUD(_Enemy);
         _Enemy->DisplayHUD();
+		_Player->DisplaySpecial();
 
 		int damagePlayer = _Player->Action();
         // Player's turn to attack Enemy or choose other action.
