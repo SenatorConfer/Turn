@@ -1,5 +1,11 @@
 # Software Requirements Specifications for Spring 2020 "Intro to Software Engineering" *Turn* Project at Wright State University
 
+## Definitions
+
+Req. 5.0 "Metapod" - A character from pokemon that would only use defensive abilities against it's opponents.
+
+Req. 6.0.1 "similar" - a range that is predetermined to be fair for the player to fight against.
+
 ## Functional Requirements
 
 ### [User Story A](Features.md "User Stories")
@@ -44,7 +50,7 @@ Req. 4.0 (Jonathan): The game shall implement an armor system
 
 Req. 4.0.1 (Jonathan): The game shall implement an armor system that reduces damage dealt to the Player
 
-Req. 4.1 (Jonathan): The game shall implement an X-Attack System
+Req. 4.1 (Jonathan): The X-Attack system shall be an option the player can choose during a fight to increase damage.
 
 Req. 4.1.1 (Jonathan): The game shall implement an X-Attack System that increases the damage dealt from a Player for a brief time during battle
 
@@ -58,6 +64,6 @@ Req. 5.0.1 (Hayden): The "Metapod"-type enemy shall have a high defense but no a
 
 Req. 6.0 (Jonathan): The game shall include a gradual enemy encounter system
 
-Req. 6.0.1 (Jonathan): The enemy encounter system shall have users battle enemies that are of a similar level to the Player
+Req. 6.0.1 (Jonathan): The enemy encounter system shall only spawn enemies that are of similar level to the player
 
 Req. 6.1 (Jonathan): The game shall have certain enemies remain un-encounterable until the Player reaches a certain level
