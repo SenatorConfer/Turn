@@ -249,6 +249,10 @@ void Game::SetEnemy(){
 		case etTimidGhost:
 			_Enemy = new TimidGhost;
 			break;
+		case etMetapod:
+			// Enemy is a Metapod
+			_Enemy = new Metapod;
+			break;
         default:
             // If the above cases do not match the selector for any reason,
             // the enemy defaults on the crab class.
@@ -398,8 +402,15 @@ void Game::Battle(){
         }
 
         // Enemy's turn to attack player.
-		if (damagePlayer != SKIP_TURN)
-			_Player->TakeDamage(_Enemy->Action());
+		if (damagePlayer != SKIP_TURN) {
+			if (_Enemy->GetType() == etMetapod) {
+				_Player->TakeDamage(_Enemy->Harden());
+			}
+			else {
+				_Player->TakeDamage(_Enemy->Action());
+			}
+		}
+			
         Sleep(SLEEP_MS);
 
         // Executes when player's health is 0 or below.
