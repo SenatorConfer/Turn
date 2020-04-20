@@ -20,11 +20,16 @@ Enemy::Enemy(){
     ExperienceAmount = 0;
 }
 
+int Enemy::Harden() {
+    // Could be changed later into a harden armor action once implemented
+    Heal();
+    return 0;
+}
+
 int Enemy::Action(){
     // Returns damage hit for the player. Uses random number to select enemy's move.
 
   int selector = rand()%9;
-
   if (health < 50) {
       switch (selector) {
       case 0: case 1: case 2: 
