@@ -119,6 +119,7 @@ void Game::SetPlayerData(){
 	* bombs
 	* potions
 	* whetstones
+	* x-attack
 	* weaponstrength
 	* coins
 	*/
@@ -142,6 +143,7 @@ void Game::SetPlayerData(){
 			<< 1 << endl
 			<< 1 << endl
 			<< 1 << endl
+			<< 0 << endl
 			<< 100 << endl
 			<< 0;
 		WriteData.close();
@@ -287,11 +289,11 @@ void Game::Intermission(){
         ClearScreen();
         cout << "*--------- Intermission ----------* " << endl << endl;
 
-	_Player->DisplayInventory();
+		_Player->DisplayInventory();
         cout << "1) Start battle" << endl;
         cout << "2) Store" << endl;
         cout << "3) Gamble" << endl;
-	cout << "4) Use Item" << endl;
+		cout << "4) Use Item" << endl;
         cout << "0) Quit" << endl << endl;
 
         choice = input();
@@ -310,14 +312,14 @@ void Game::Intermission(){
             // _Player is passed in to add items won to the player inventory.
             _Gambling.Gamble(_Player);
             break;
-	case 4:
-	    _Player->UseItem();
-	    _Player->SaveGame();
-	    break;
-        case 0:
+		case 4:
+			 _Player->UseItem();
+			 _Player->SaveGame();
+			 break;
+			 case 0:
             // Breaks the loop in StartGame(), going back to MainMenu().
             IsPlaying=false;
-	    break;
+			break;
         }
     }
 }
@@ -390,6 +392,8 @@ void Game::Battle(){
             _Player->AddExperience(_Enemy->ReturnExperience());
 			// Replenishes player's health for the next round.
 			_Player->ReplenishHealth();
+			// Sets a player's used X-Attack Number to 0
+			_Player->LoseXAttack();
 
 			// If player wants to battle again, it breaks the loop and uses tail recursion to play again.
             if (PlayAgain()) break;
@@ -408,6 +412,8 @@ void Game::Battle(){
             _Player->LoseExperience(_Enemy->ReturnExperience());
 			// Replenishes player's health for the next round.
 			_Player->ReplenishHealth();
+			// Sets a player's used X-Attack Number to 0
+			_Player->LoseXAttack();
 
 			if (PlayAgain()) break;
             return;
