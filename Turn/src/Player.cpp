@@ -38,6 +38,7 @@ void Player::SaveGame(){
 			<< bombs << endl
 			<< potions << endl
 			<< whetstones << endl
+			<< xAttack << endl
 			<< weaponstrength << endl
 			<< coins;
     		WriteData.close();
@@ -56,16 +57,17 @@ void Player::SetPlayerData(){
 	ReadData.open("data.txt");
 	if (ReadData.is_open())	{
 		ReadData >> player_type;
-    ReadData.ignore();       // Ignore rest of line ready for getline
-    getline(ReadData, name);
-    ReadData >> gender;
-    ReadData >> level;
-    ReadData >> experience;
+		ReadData.ignore();       // Ignore rest of line ready for getline
+		getline(ReadData, name);
+		ReadData >> gender;
+		ReadData >> level;
+		ReadData >> experience;
 		ReadData >> health;
 		ReadData >> arrows;
 		ReadData >> bombs;
 		ReadData >> potions;
 		ReadData >> whetstones;
+		ReadData >> xAttack;
 		ReadData >> weaponstrength;
 		ReadData >> coins;
 		ReadData.close();
@@ -94,6 +96,7 @@ int Player::Action(){
 		<< "6) Use Bomb" << endl
 		<< "7) Use Potion" << endl
 		<< "8) Use Whetstone" << endl
+		<< "9) Use X-Attack" << endl
 		<< "0) Get me out of here!" << endl << endl;
 
 	while (true) {
@@ -176,6 +179,18 @@ int Player::Action(){
 				return 0;
 			} else {
 				cout << "No whetstones in the inventory!" << endl;
+				return SKIP_TURN;
+			}
+		case 9:
+			// Player increases their attack power.
+			// Does not execute if there are no X-Attacks in inventory.
+			// No damage is done to the enemy.
+			if (xAttack > 0) {
+				AddXAttack();
+				return 0;
+			}
+			else {
+				cout << "No X-Attacks in the inventory!" << endl;
 				return SKIP_TURN;
 			}
 		default:
@@ -283,6 +298,9 @@ void Player::AddStoreItemToInventory(int type) {
 	case ITEMTYPE::WHETSTONE:
 		++whetstones;
 		break;
+	case ITEMTYPE::XATTACK:
+		++xAttack;
+		break;
 	}
 }
 
@@ -300,6 +318,9 @@ void Player::RemoveStoreItemFromInventory(int type) {
 		break;
 	case ITEMTYPE::WHETSTONE:
 		--whetstones;
+		break;
+	case ITEMTYPE::XATTACK:
+		--xAttack;
 		break;
 	}
 }
@@ -365,6 +386,19 @@ void Player::ReplenishHealth(){
 		health += 30;
 		if (health > 100) health = 100;
 	}
+}
+
+void Player::AddXAttack() {
+	// Adds an X-Attack to player
+	usedXAttack += 1;
+	xAttack -= 1;
+	ColourPrint(name, Console::DarkGrey);
+	cout << " used an X-Attack! " << endl;
+}
+
+void Player::LoseXAttack() {
+	// Clears the used X-Attack from Player after each battle
+	usedXAttack = 0;
 }
 
 void Player::AddExperience(int xp){
@@ -442,6 +476,7 @@ void Player::DisplayInventory(){
     PrintInventoryItem("Potions: [", potions, "]");
     PrintInventoryItem("Bombs: [", bombs, "]");
     PrintInventoryItem("Whetstones: [", whetstones, "]");
+	PrintInventoryItem("X-Attack: [", xAttack, "]");
     PrintInventoryItem("Weapon strength: [", weaponstrength, "%]");
     PrintInventoryItem("Wealth: [", coins, "] coins");
     PrintDivider('*', '-', "");
@@ -466,11 +501,20 @@ int Player::GetItem(int type) {
 	case ITEMTYPE::WHETSTONE:
 		return whetstones;
 		break;
+	case ITEMTYPE::XATTACK:
+		return xAttack;
+		break;
 	}
 }
 
 int Player::GenericAttack(){
-    int damage = ReturnDamage();
+	int damage = 0;
+	if (usedXAttack > 0) {
+		damage = ReturnDamage() * 5 * .25 + usedXAttack;
+	}
+	else {
+		damage = ReturnDamage();
+	}
     DeductDamage(damage);
 	ColourPrint(name, Console::DarkGrey);
     if (gender == 'M')
@@ -484,7 +528,13 @@ int Player::GenericAttack(){
 }
 
 int Player::RiskAttack(){
-    int damage = ReturnRiskAttackDamage();
+	int damage = 0;
+	if (usedXAttack > 0) {
+		damage = ReturnRiskAttackDamage() * 5 * .25 + usedXAttack;
+	}
+	else {
+		damage = ReturnRiskAttackDamage();
+	}
     DeductDamage(damage);
 	ColourPrint(name, Console::DarkGrey);
     cout << " takes a risk and attack! It deals ";
@@ -497,8 +547,15 @@ int Player::RiskAttack(){
 }
 
 int Player::SpecialAttack() {
-	int damage = ReturnDamage();
-	int damage2 = ReturnDamage();
+	int damage, damage2 = 0;
+	if (usedXAttack > 0) {
+		damage = ReturnDamage() * 5 * .25 + usedXAttack;
+		damage2 = ReturnDamage() * 5 * .25 + usedXAttack;
+	}
+	else {
+		damage = ReturnDamage();
+		damage2 = ReturnDamage();
+	}
 	int damage3 = damage + damage2;
 	DeductDamage(damage);
 	DeductDamage(damage2);
