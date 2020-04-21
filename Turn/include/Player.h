@@ -8,7 +8,7 @@
 class Player : public Entity, public SoundMaker {
     // Contains the functions needed to construct the player's character.
     public:
-		Player(void);
+	Player(void);
         void SaveGame();
 
         void SetPlayerData();
@@ -16,12 +16,14 @@ class Player : public Entity, public SoundMaker {
 	void UseItem();
         void AddToInventory(std::vector<int>);
 	void AddStoreItemToInventory(int);
-    void RemoveStoreItemFromInventory(int);
+	void RemoveStoreItemFromInventory(int);
         void DisplayHUD(Enemy*);
         void DisplaySpecialBar();
         void DisplaySpecial();
-        void AddSpecial();
+	void AddSpecial();
         void ReplenishHealth();
+	void AddXAttack();
+	void LoseXAttack();
 
         void AddExperience(int);
         void LoseExperience(int);
@@ -44,7 +46,7 @@ class Player : public Entity, public SoundMaker {
         int UseBomb();
         void DeductDamage(int&);
         int ReturnBowDamage();
-		void WeakenWeapon(int impact);
+	void WeakenWeapon(int impact);
 
         int Flee();
 
@@ -63,6 +65,8 @@ class Player : public Entity, public SoundMaker {
         int potions;
         int bombs;
         int weaponstrength;
+	int xAttack;
+	int usedXAttack = 0;
         int coins;
 };
 
