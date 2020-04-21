@@ -28,6 +28,7 @@ enum EnemyType
     etZabra,
     etTimidGhost,
     etGremlin,
+    etMetapod,
     etNumEnemyTypes
 };
 
@@ -36,6 +37,7 @@ class Enemy : public Entity {
     public:
         Enemy();
 
+        int Harden();
         int Action();
         void DisplayHUD();
 
