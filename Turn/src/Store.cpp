@@ -14,6 +14,7 @@ const unsigned short arrowsCost = 40;
 const unsigned short bombCost = 100;
 const unsigned short potionCost = 150;
 const unsigned short whetstoneCost = 20;
+const unsigned short xattackCost = 200;
 
 //Messages
 const string lowCoinsMessage = " Insufficient Coins !";
@@ -57,13 +58,14 @@ void Store::StoreFront(Player* _Player) {
 				cout << " 1) Arrow\t\t " << arrowsCost << endl;
 				cout << " 2) Bomb\t\t " << bombCost << endl;
 				cout << " 3) Potion\t\t " << potionCost << endl;
-				cout << " 4) Whetstone\t\t " << whetstoneCost << endl << endl;
+				cout << " 4) Whetstone\t\t " << whetstoneCost << endl;
+				cout << " 5) X-Attack\t\t " << xattackCost << endl << endl;
 				cout << " 0) Exit" << endl << endl;
 				cout << " ---------------------------------- " << endl << endl;
 				cout << " What do you want to buy today?" << endl << endl << " ";
 				choice = input();
 				cout << endl << " ";
-				if (choice > 0 && choice < 5) {
+				if (choice > 0 && choice < 6) {
 					cout << choice << endl;
 					cout << " How many do you want to buy today?" << endl << endl << " ";
 					amount = input();
@@ -158,6 +160,26 @@ void Store::StoreFront(Player* _Player) {
 					}
 					Sleep(SLEEP_MS);
 					break;
+				case ITEMTYPE::XATTACK:
+					if (amount == 0) {
+						cout << invalidAmount << endl;
+					}
+					else if (coins < (xattackCost * amount)) {
+						cout << amount << lowCoinsMessage << endl;
+					}
+					else {
+						cout << amount << " X-Attack";
+						if (amount > 1) {
+							cout << "s";
+						}
+						cout << " purchased !" << endl;
+						for (int i = 0; i < amount; i++) {
+							_Player->AddStoreItemToInventory(ITEMTYPE::XATTACK);
+							_Player->LoseCoins(xattackCost);
+						}
+					}
+					Sleep(SLEEP_MS);
+					break;
 				case 0://Exit Section
 					break;
 				default:
@@ -179,13 +201,14 @@ void Store::StoreFront(Player* _Player) {
 				cout << " 1) Arrow\t\t " << arrowsCost * .5 << endl;
 				cout << " 2) Bomb\t\t " << bombCost * .5 << endl;
 				cout << " 3) Potion\t\t " << potionCost * .5 << endl;
-				cout << " 4) Whetstone\t\t " << whetstoneCost * .5 << endl << endl;
+				cout << " 4) Whetstone\t\t " << whetstoneCost * .5 << endl;
+				cout << " 5) X-Attack\t\t " << xattackCost * .5 << endl << endl;
 				cout << " 0) Exit" << endl << endl;
 				cout << " ---------------------------------- " << endl << endl;
 				cout << " What do you want to sell today?" << endl << endl << " ";
 				choice = input();
 				cout << endl << " ";
-				if (choice > 0 && choice < 5) {
+				if (choice > 0 && choice < 6) {
 					cout << choice << endl;
 					cout << " How many do you want to sell today?" << endl << endl << " ";
 					amount = input();
@@ -276,6 +299,26 @@ void Store::StoreFront(Player* _Player) {
 						for (int i = 0; i < amount; i++) {
 							_Player->RemoveStoreItemFromInventory(ITEMTYPE::WHETSTONE);
 							_Player->AddCoins(whetstoneCost * .5);
+						}
+					}
+					Sleep(SLEEP_MS);
+					break;
+				case ITEMTYPE::XATTACK:
+					if (amount == 0) {
+						cout << invalidAmount << endl;
+					}
+					else if (_Player->GetItem(ITEMTYPE::XATTACK) < amount) {
+						cout << lowItemMessage << endl;
+					}
+					else {
+						cout << amount << " X-Attack";
+						if (amount > 1) {
+							cout << "s";
+						}
+						cout << " sold !" << endl;
+						for (int i = 0; i < amount; i++) {
+							_Player->RemoveStoreItemFromInventory(ITEMTYPE::XATTACK);
+							_Player->AddCoins(xattackCost * .5);
 						}
 					}
 					Sleep(SLEEP_MS);
