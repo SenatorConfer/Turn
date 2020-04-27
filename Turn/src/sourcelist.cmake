@@ -19,6 +19,7 @@ set (SOURCES ${SOURCES}
     src/EnemyTypes/Goblin.cpp
     src/EnemyTypes/Gremlin.cpp
     src/EnemyTypes/Lich.cpp
+    src/EnemyTypes/Metapod.cpp
     src/EnemyTypes/Mimic.cpp
     src/EnemyTypes/Murloc.cpp
     src/EnemyTypes/Putnafer.cpp
