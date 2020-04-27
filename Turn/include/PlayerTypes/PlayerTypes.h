@@ -8,5 +8,6 @@
 #include "Healer.h"
 #include "Debugger.h"
 #include "Saitama.h"
+#include "Ranger.h"
 
 #endif // PLAYERTYPES_H_INCLUDED
