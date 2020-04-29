@@ -404,7 +404,12 @@ void Game::Battle(){
             // Returns to StartGame()'s loop, and executes Intermission().
             return;
         }
-
+		/*!
+			This if statement works toward User story E.
+			Req 5.0 - Implementation of the metapod enemy has been met as you can encounter it during the game.
+			Req 5.0.1 - The Metapod has a high defense in that it heals a lot more than normal and also meets that it has no attack.
+			Link - github.com/SenatorConfer/Turn/blob/master/Requirements.md
+		*/
         // Enemy's turn to attack player.
 		if (damagePlayer != SKIP_TURN) {
 			if (_Enemy->GetType() == etMetapod) {
