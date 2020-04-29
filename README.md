@@ -10,7 +10,7 @@ This program was originally written back in 2013 by tagniam. This project was th
 ![Menu screen](screenshots/menu.png)
 
 ## How To Play
-See the [wiki](https://github.com/tagniam/Turn/wiki) for instructions.
+See the [wiki](https://bitly.com/98K8eH) for instructions.
 
 ## Getting Started
 ### Prerequisites
