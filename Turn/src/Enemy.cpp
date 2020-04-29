@@ -28,7 +28,13 @@ int Enemy::Harden() {
 
 int Enemy::Action(){
     // Returns damage hit for the player. Uses random number to select enemy's move.
-
+    /*!
+    This if statement satisfies User Story B.
+    Req 2.0 - Enemies will focus on protecting their own life instead of just attacking once their about to die and are more likely to heal
+    Req 2.0.1 - If the Enemy is at full health they will not waste their turn by healing.
+    Req 2.0.2 - Once the enemy is below 50 health the odds that they will heal increase and the amount of times they attack lowers.
+    Link - github.com/SenatorConfer/Turn/blob/master/Requirements.md
+    */
   int selector = rand()%9;
   if (health < 50) {
       switch (selector) {
