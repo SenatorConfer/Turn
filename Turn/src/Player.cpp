@@ -640,6 +640,14 @@ void Player::DeductDamage(int &damage){
         damage=0;
 }
 
+void Player::SetType(int type) {
+	player_type = type;
+}
+
+int Player::GetType() {
+	return player_type;
+}
+
 int Player::ReturnBowDamage(){
     if (arrows < 1)
         return 0;

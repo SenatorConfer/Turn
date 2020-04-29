@@ -73,6 +73,7 @@ int Game::InitializePlayerClass() {
 	int player_class = 0;
 	player_class = GetChoice(MenuType::ePlayerClass);
 	SetPlayerClass(player_class);
+	_Player->SetType(player_class);
 	return player_class;
 }
 
@@ -92,11 +93,15 @@ void Game::SetPlayerClass(int player_class) {
 		_Player = new Healer;
 		break;
 	case 4:
+		// Player's class is a Ranger.
+		_Player = new Ranger;
+		break;
+	case 5:
 		// Player's class is a debugger.
 		// Used to easily defeat enemies. Only for development purposes.
 		_Player = new Debugger;
 		break;
-	case 5:
+	case 6:
 		// You are Saitama.
 		// Do I have to explain??
 		_Player = new Saitama;
@@ -133,19 +138,35 @@ void Game::SetPlayerData(){
 		ofstream WriteData;
 		WriteData.open("data.txt");
 
-		WriteData << InitializePlayerClass() << endl
-			<< InitializePlayerName() << endl
-            << InitializePlayerGender() << endl
-			<< 1 << endl
-			<< 0 << endl
-			<< 100 << endl
-			<< 10 << endl
-			<< 1 << endl
-			<< 1 << endl
-			<< 1 << endl
-			<< 0 << endl
-			<< 100 << endl
-			<< 0;
+		WriteData << InitializePlayerClass() << endl;
+			if (_Player->GetType() == 4) {
+				WriteData << InitializePlayerName() << endl
+					<< InitializePlayerGender() << endl
+					<< 1 << endl
+					<< 0 << endl
+					<< 100 << endl
+					<< 20 << endl
+					<< 1 << endl
+					<< 1 << endl
+					<< 1 << endl
+					<< 0 << endl
+					<< 100 << endl
+					<< 0;
+			}
+			else {
+				WriteData << InitializePlayerName() << endl
+					<< InitializePlayerGender() << endl
+					<< 1 << endl
+					<< 0 << endl
+					<< 100 << endl
+					<< 10 << endl
+					<< 1 << endl
+					<< 1 << endl
+					<< 1 << endl
+					<< 0 << endl
+					<< 100 << endl
+					<< 0;
+			}
 		WriteData.close();
 	}
 
@@ -474,8 +495,9 @@ void Game::DisplayMenu(MenuType menuType)
 			<< "1) Warrior (high damage, low healing capabilities)" << endl
 			<< "2) Rogue (moderate damage, moderate healing capabilities)" << endl
 			<< "3) Healer (low damage, high healing capabilities)" << endl
-			<< "4) Debugger (INFINITE DAMAGE!!!!)" << endl
-			<< "5) Saitama (self-explanatory)" << endl
+			<< "4) Ranger (moderate damage, starts with more arrows)" << endl
+			<< "5) Debugger (INFINITE DAMAGE!!!!)" << endl
+			<< "6) Saitama (self-explanatory)" << endl
 			<< endl << endl
 			<< "> ";
 		break;

@@ -40,4 +40,5 @@ set (SOURCES ${SOURCES}
     src/PlayerTypes/Rogue.cpp
     src/PlayerTypes/Saitama.cpp
     src/PlayerTypes/Warrior.cpp
+		src/PlayerTypes/Ranger.cpp
     )

@@ -34,6 +34,8 @@ class Player : public Entity, public SoundMaker {
         void DisplayInventory();
         int GetCoins();
         int GetItem(int);
+        void SetType(int);
+        int GetType();
 
     private:
         int GenericAttack();
