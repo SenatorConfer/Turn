@@ -1,5 +1,12 @@
 #include "../../include/PlayerTypes/Ranger.h"
-
+/*!
+    This Ranger Player Class works towards Story B.
+    Req 3.0 - Along with the multiple player classes that had been added by defualt a new ranger class has been introduced and available to the player.
+    Req 3.1 - A new Ranger class has been added to the list of available classes availble to the player.
+    This class is unique in relation to the other player classes in that it is the only class that has a special set of starting items. to make
+    up for weaker overall stats.
+    Link - github.com/SenatorConfer/Turn/blob/master/Requirements.md
+    */
 Ranger::Ranger(void)
 {
     SoundInfo info;
