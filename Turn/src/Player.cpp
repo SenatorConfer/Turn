@@ -119,6 +119,14 @@ int Player::Action(){
 			AddSpecial();
 			return damage;
 		case 3:
+			/*!
+				This case works toward User Story C.
+				Req 3.0.1 - Implementation of a special attack has been added to the game and is based on the player's class.
+				Req 3.0.1.1 - Based on the player's class the special attack will do damage relevant to their class.
+				I chose this way of implementation because it was the most native way to implement it into the game while
+				looking like the original attack codes.
+				Link - github.com/SenatorConfer/Turn/blob/master/Requirements.md
+			*/
 			// Player uses their special attack
 			if (special >= 100) {
 				damage = SpecialAttack();
