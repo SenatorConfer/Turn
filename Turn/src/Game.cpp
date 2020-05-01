@@ -338,7 +338,7 @@ void Game::Intermission(){
             _Gambling.Gamble(_Player);
             break;
 		case 4:
-			 _Player->UseItem();
+			 _Player->UseItemNonBattle();
 			 _Player->SaveGame();
 			 break;
 			 case 0:

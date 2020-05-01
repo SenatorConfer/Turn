@@ -82,21 +82,14 @@ int Player::Action(){
 
     int choice = 0;
 
-
     // Displays the inventory.
     DisplayInventory();
 
     // Gives player a list of moves to choose from.
 	cout << "Choose your move:" << endl
 		<< "1) Attack" << endl
-		<< "2) Risk Attack" << endl
-		<< "3) Special Attack" << endl
-		<< "4) Bow and Arrow" << endl
-		<< "5) Heal" << endl << endl
-		<< "6) Use Bomb" << endl
-		<< "7) Use Potion" << endl
-		<< "8) Use Whetstone" << endl
-		<< "9) Use X-Attack" << endl
+		<< "2) Heal" << endl
+		<< "3) Use Item" << endl
 		<< "0) Get me out of here!" << endl << endl;
 
 	while (true) {
@@ -106,6 +99,39 @@ int Player::Action(){
 		switch (choice) {
 		case 0:
 			return Flee();
+		case 1:
+			// Produces Player attack menu and returns result.
+			return UseAttack();
+		case 2:
+			// Player heals, no damage is done to enemy.
+			PlayHeal();
+			Heal();
+			return 0;
+		case 3:
+			return UseItem();
+		}
+	}
+}
+
+int Player::UseAttack() {
+	// Returns the amount of attack points the player gives.
+
+	int choice = 0;
+
+	// Gives player a list of moves to choose from.
+	cout << "Choose which attack make:" << endl
+		<< "1) Attack" << endl
+		<< "2) Risk Attack" << endl
+		<< "3) Special Attack" << endl
+		<< "4) Bow and Arrow" << endl
+		<< "0) Previous Menu" << endl << endl;
+	while (true) {
+		choice = input();
+		int damage = 0;
+		// Evaluates player's choice.
+		switch (choice) {
+		case 0:
+			return SKIP_TURN;
 		case 1:
 			// Player generically attacks.
 			damage = GenericAttack();
@@ -152,12 +178,34 @@ int Player::Action(){
 				Sleep(SLEEP_MS);
 				return SKIP_TURN;
 			}
-		case 5:
-			// Player heals, no damage is done to enemy.
-			PlayHeal();
-			Heal();
-			return 0;
-		case 6:
+		default:
+			// Generically attacks by default if player's choice does not equal above cases.
+			return GenericAttack();
+		}
+	}
+}
+
+int Player::UseItem() {
+	// Returns the amount of attack points the player gives.
+
+	int choice = 0;
+
+	// Gives player a list of moves to choose from.
+	cout << "Choose your move:" << endl
+		<< "1) Use Bomb" << endl
+		<< "2) Use Potion" << endl
+		<< "3) Use Whetstone" << endl
+		<< "4) Use X-Attack" << endl
+		<< "0) Previous Menu" << endl << endl;
+
+	while (true) {
+		choice = input();
+		int damage = 0;
+		// Evaluates player's choice.
+		switch (choice) {
+		case 0:
+			return SKIP_TURN;
+		case 1:
 			// Player throws a bomb.
 			// Does not execute if there are no bombs in the inventory.
 			if (bombs > 0) {
@@ -168,28 +216,30 @@ int Player::Action(){
 				cout << "No bombs in the inventory!" << endl;
 				return SKIP_TURN;
 			}
-		case 7:
+		case 2:
 			// Player drinks a potion.
 			// Does not execute if there are no potions in the inventory.
 			if (potions > 0) {
 				UsePotion();
 				return 0;
-			}else {
+			}
+			else {
 				cout << "No potions in the inventory!" << endl;
 				return SKIP_TURN;
 			}
-		case 8:
+		case 3:
 			// Player sharpens their weapon with a whetstone.
 			// Does not execute if there are no whetstones in inventory.
 			// No damage is done to the enemy.
 			if (whetstones > 0) {
 				UseWhetstone();
 				return 0;
-			} else {
+			}
+			else {
 				cout << "No whetstones in the inventory!" << endl;
 				return SKIP_TURN;
 			}
-		case 9:
+		case 4:
 			// Player increases their attack power.
 			// Does not execute if there are no X-Attacks in inventory.
 			// No damage is done to the enemy.
@@ -203,12 +253,12 @@ int Player::Action(){
 			}
 		default:
 			// Generically attacks by default if player's choice does not equal above cases.
-			return GenericAttack();
+			return SKIP_TURN;
 		}
 	}
 }
 
-void Player::UseItem() {
+void Player::UseItemNonBattle() {
 	// Use item from inventory
 	int choice = 0;
 
@@ -236,7 +286,8 @@ void Player::UseItem() {
 			if (potions > 0) {
 				UsePotion();
 				Sleep(SLEEP_MS);
-			} else {
+			}
+			else {
 				cout << "No potions in the inventory!" << endl;
 				Sleep(SLEEP_MS);
 
@@ -249,15 +300,16 @@ void Player::UseItem() {
 			if (whetstones > 0) {
 				UseWhetstone();
 				Sleep(SLEEP_MS);
-			} else {
+			}
+			else {
 				cout << "No whetstones in the inventory!" << endl;
 				Sleep(SLEEP_MS);
 			}
 
 			break;
 		default:
-				cout<<"Item not present in the inventory!"<<endl;
- 				Sleep(SLEEP_MS);
+			cout << "Item not present in the inventory!" << endl;
+			Sleep(SLEEP_MS);
 			break;
 		}
 	}
