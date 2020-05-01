@@ -9,33 +9,34 @@ class Player : public Entity, public SoundMaker {
     // Contains the functions needed to construct the player's character.
     public:
 	Player(void);
-        void SaveGame();
-
-        void SetPlayerData();
-        int Action();
-	void UseItem();
-        void AddToInventory(std::vector<int>);
+	void SaveGame();
+	void SetPlayerData();
+	int Action();
+	int UseAttack();
+	int UseItem();
+	void UseItemNonBattle();
+	void AddToInventory(std::vector<int>);
 	void AddStoreItemToInventory(int);
 	void RemoveStoreItemFromInventory(int);
-        void DisplayHUD(Enemy*);
-        void DisplaySpecialBar();
-        void DisplaySpecial();
+	void DisplayHUD(Enemy*);
+	void DisplaySpecialBar();
+	void DisplaySpecial();
 	void AddSpecial();
-        void ReplenishHealth();
+	void ReplenishHealth();
 	void AddXAttack();
 	void LoseXAttack();
 
-        void AddExperience(int);
-        void LoseExperience(int);
-
-        void AddCoins(int);
-        void LoseCoins(int);
-
-        void DisplayInventory();
-        int GetCoins();
-        int GetItem(int);
-        void SetType(int);
-        int GetType();
+	void AddExperience(int);
+	void LoseExperience(int);
+		
+	void AddCoins(int);
+	void LoseCoins(int);
+	
+	void DisplayInventory();
+	int GetCoins();
+	int GetItem(int);    
+	void SetType(int);
+	int GetType();
 
     private:
         int GenericAttack();
@@ -56,7 +57,7 @@ class Player : public Entity, public SoundMaker {
         void PrintXPBar(std::string, int, std::string, std::string, int, std::string);
         void PrintDivider(char, char, std::string);
 
-
+		
 	int player_type;
         int level;
         int special = 0;
@@ -69,7 +70,7 @@ class Player : public Entity, public SoundMaker {
         int weaponstrength;
 	int xAttack;
 	int usedXAttack = 0;
-        int coins;
+	int coins;
 };
 
 #endif // PLAYER_H
