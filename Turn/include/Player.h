@@ -11,6 +11,7 @@ class Player : public Entity, public SoundMaker {
 	Player(void);
 	void SaveGame();
 	void SetPlayerData();
+	void TakeDamage(int damage);
 	int Action();
 	int UseAttack();
 	int UseItem();
@@ -25,6 +26,8 @@ class Player : public Entity, public SoundMaker {
 	void ReplenishHealth();
 	void AddXAttack();
 	void LoseXAttack();
+	void AddXDefense();
+	void LoseXDefense();
 
 	void AddExperience(int);
 	void LoseExperience(int);
@@ -70,6 +73,8 @@ class Player : public Entity, public SoundMaker {
         int weaponstrength;
 	int xAttack;
 	int usedXAttack = 0;
+	int xDefense;
+	int usedXDefense = 0;
 	int coins;
 };
 
