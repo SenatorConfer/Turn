@@ -2,6 +2,10 @@
 
 ## Definitions
 
+Req. 4.0 "armor system" - Implemented using X-Defense. X-Defense is a battle item that, when used, reduces the damage that an Enemy deals to a Player
+
+Req. 4.1 "X-Attack" - A battle item that, when used, increases the damage that a Player deals to an Enemy
+
 Req. 5.0 "Metapod" - A character from pokemon that would only use defensive abilities against it's opponents.
 
 Req. 6.0.1 "similar" - a range that is predetermined to be fair for the player to fight against.
@@ -59,11 +63,3 @@ Req. 4.1.1 (Jonathan): The game shall implement an X-Attack System that increase
 Req. 5.0 (Hayden): The game shall include a "Metapod"-type enemy
 
 Req. 5.0.1 (Hayden): The "Metapod"-type enemy shall have a high defense but no attack
-
-### [User Story F](Features.md "User Stories")
-
-Req. 6.0 (Jonathan): The game shall include a gradual enemy encounter system
-
-Req. 6.0.1 (Jonathan): The enemy encounter system shall only spawn enemies that are of similar level to the player
-
-Req. 6.1 (Jonathan): The game shall have certain enemies remain un-encounterable until the Player reaches a certain level
