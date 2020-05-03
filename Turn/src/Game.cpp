@@ -150,6 +150,7 @@ void Game::SetPlayerData(){
 					<< 1 << endl
 					<< 1 << endl
 					<< 0 << endl
+					<< 0 << endl
 					<< 100 << endl
 					<< 0;
 			}
@@ -163,6 +164,7 @@ void Game::SetPlayerData(){
 					<< 1 << endl
 					<< 1 << endl
 					<< 1 << endl
+					<< 0 << endl
 					<< 0 << endl
 					<< 100 << endl
 					<< 0;
@@ -511,13 +513,16 @@ void Game::DisplayMenu(MenuType menuType)
 			<< "-- Actions --" << endl
 			<< "Attack: Regular attack" << endl
 			<< "Risk Attack: Attack deals more damage, but with a chance of missing" << endl
+			<< "Special Attack: Attack using a built-up meter to cause more damage" << endl
 			<< "Heal: Restore an amount of your HP" << endl
 			<< "Flee: Run away from battle" << endl << endl
 			<< "-- Items --" << endl
 			<< "Bombs: Deals 50HP to your opponent with no chance of missing" << endl
 			<< "Arrows: Deals 10-15HP to your opponent with no chance of missing" << endl
 			<< "Potion: Replenishes your HP to 100" << endl
-			<< "Whetstone: Restores your weapon's sharpness." << endl << endl
+			<< "Whetstone: Restores your weapon's sharpness." << endl
+			<< "X-Attack: Increases your attack during battle." << endl
+			<< "X-Defense: Increases your defense during battle." << endl << endl
 			<< "Good luck and have fun!" << endl << endl
 			<< "0) Quit" << endl << endl << "> ";
 		break;

@@ -39,6 +39,7 @@ void Player::SaveGame(){
 			<< potions << endl
 			<< whetstones << endl
 			<< xAttack << endl
+			<< xDefense << endl
 			<< weaponstrength << endl
 			<< coins;
     		WriteData.close();
@@ -68,12 +69,24 @@ void Player::SetPlayerData(){
 		ReadData >> potions;
 		ReadData >> whetstones;
 		ReadData >> xAttack;
+		ReadData >> xDefense;
 		ReadData >> weaponstrength;
 		ReadData >> coins;
 		ReadData.close();
  	} else {
 		cout << "Error opening savegame data (data.txt)." << endl;
 	}
+}
+
+void Player::TakeDamage(int damage) {
+	// Doesn't subtract damage points if player chooses to quit.
+	if (damage == -1) {
+		IsPlaying = false;
+		return;
+	}
+
+	// Simply subtracts the damage player deals to the enemy.
+	health -= damage;
 }
 
 int Player::Action(){
@@ -240,6 +253,12 @@ int Player::UseItem() {
 				return SKIP_TURN;
 			}
 		case 4:
+			/*!
+				This case works toward User Story D.
+				Req 4.1 - X-Attack is an item that can only be used during battle
+				Req 4.1.1 - This is increases the attack of the player during battle.
+				I chose this way of implementation because it built upon the previous item usages that were already in the code.
+			*/
 			// Player increases their attack power.
 			// Does not execute if there are no X-Attacks in inventory.
 			// No damage is done to the enemy.
@@ -249,6 +268,15 @@ int Player::UseItem() {
 			}
 			else {
 				cout << "No X-Attacks in the inventory!" << endl;
+				return SKIP_TURN;
+			}
+		case 5:
+			if (xDefense > 0) {
+				AddXDefense();
+				return 0;
+			}
+			else {
+				cout << "No X-Defense in the inventory!" << endl;
 				return SKIP_TURN;
 			}
 		default:
@@ -361,6 +389,9 @@ void Player::AddStoreItemToInventory(int type) {
 	case ITEMTYPE::XATTACK:
 		++xAttack;
 		break;
+	case ITEMTYPE::XDEFENSE:
+		++xDefense;
+		break;
 	}
 }
 
@@ -461,6 +492,19 @@ void Player::LoseXAttack() {
 	usedXAttack = 0;
 }
 
+void Player::AddXDefense() {
+	// Adds an X-Defense to the player
+	usedXDefense += 1;
+	xDefense -= 1;
+	ColourPrint(name, Console::DarkGrey);
+	cout << " used an X-Defense! " << endl;
+}
+
+void Player::LoseXDefense() {
+	// Clears the used X-Attack from Player after each battle
+	usedXAttack = 0;
+}
+
 void Player::AddExperience(int xp){
     // Adds points to the player's experience and levels player up.
 
@@ -537,6 +581,7 @@ void Player::DisplayInventory(){
     PrintInventoryItem("Bombs: [", bombs, "]");
     PrintInventoryItem("Whetstones: [", whetstones, "]");
 	PrintInventoryItem("X-Attack: [", xAttack, "]");
+	PrintInventoryItem("X-Defense: [", xDefense, "]");
     PrintInventoryItem("Weapon strength: [", weaponstrength, "%]");
     PrintInventoryItem("Wealth: [", coins, "] coins");
     PrintDivider('*', '-', "");
@@ -563,6 +608,9 @@ int Player::GetItem(int type) {
 		break;
 	case ITEMTYPE::XATTACK:
 		return xAttack;
+		break;
+	case ITEMTYPE::XDEFENSE:
+		return xDefense;
 		break;
 	}
 }
