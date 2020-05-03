@@ -78,11 +78,26 @@ void Player::SetPlayerData(){
 	}
 }
 
+/**
+ * Implemented from Entity.h to account for the potential reduction of 
+ * damage by using an X-Defense item.
+ *
+ * Implemented as part of User Story D
+ *
+ * @param int damage - The damage dealt from an opponent to the Player during battle
+ */
 void Player::TakeDamage(int damage) {
 	// Doesn't subtract damage points if player chooses to quit.
 	if (damage == -1) {
 		IsPlaying = false;
 		return;
+	}
+
+	if (usedXDefense > 0 && damage > 0) {
+		damage = damage * .8 - usedXDefense;
+		if (damage < 1) {
+			damage = 1;
+		}
 	}
 
 	// Simply subtracts the damage player deals to the enemy.
@@ -98,6 +113,10 @@ int Player::Action(){
     // Displays the inventory.
     DisplayInventory();
 
+	/*! 
+		Reduces menu size during battle, allowing for a more
+		organized structure.
+	*/
     // Gives player a list of moves to choose from.
 	cout << "Choose your move:" << endl
 		<< "1) Attack" << endl
@@ -126,6 +145,12 @@ int Player::Action(){
 	}
 }
 
+/**
+ * To be used in the Player::Action function, allowing the Player to select
+ * an attack in an attack-only menu
+ *
+ * @param None
+ */
 int Player::UseAttack() {
 	// Returns the amount of attack points the player gives.
 
@@ -198,6 +223,12 @@ int Player::UseAttack() {
 	}
 }
 
+/**
+ * To be used in the Player::Action function, allowing the Player to select
+ * an item in an item-only menu
+ *
+ * @param None
+ */
 int Player::UseItem() {
 	// Returns the amount of attack points the player gives.
 
@@ -209,6 +240,7 @@ int Player::UseItem() {
 		<< "2) Use Potion" << endl
 		<< "3) Use Whetstone" << endl
 		<< "4) Use X-Attack" << endl
+		<< "5) Use X-Defense" << endl
 		<< "0) Previous Menu" << endl << endl;
 
 	while (true) {
@@ -271,6 +303,15 @@ int Player::UseItem() {
 				return SKIP_TURN;
 			}
 		case 5:
+			/*!
+				This case works toward User Story D.
+				Req 4.0 - X-Defense is an item that can only be used during battle
+				Req 4.0.1 - This is increases the defense of the player during battle.
+				I chose this way of implementation because it built upon the previous item usages that were already in the code.
+			*/
+			// Player increases their defense.
+			// Does not execute if there are no X-Defenses in inventory.
+			// No damage is done to the enemy.
 			if (xDefense > 0) {
 				AddXDefense();
 				return 0;
@@ -413,6 +454,9 @@ void Player::RemoveStoreItemFromInventory(int type) {
 	case ITEMTYPE::XATTACK:
 		--xAttack;
 		break;
+	case ITEMTYPE::XDEFENSE:
+		--xDefense;
+		break;
 	}
 }
 
@@ -479,6 +523,14 @@ void Player::ReplenishHealth(){
 	}
 }
 
+/**
+ * Implemented to allow the Player to add an X-Attack to 
+ * usedXAttack during battle, increasing his attack power
+ *
+ * Implemented as part of User Story D, Req 4.1
+ *
+ * @param None
+ */
 void Player::AddXAttack() {
 	// Adds an X-Attack to player
 	usedXAttack += 1;
@@ -487,11 +539,27 @@ void Player::AddXAttack() {
 	cout << " used an X-Attack! " << endl;
 }
 
+/**
+ * Implemented to remove all usedXAttack once a battle
+ * has concluded
+ *
+ * Implemented as part of User Story D, Req 4.1
+ *
+ * @param None
+ */
 void Player::LoseXAttack() {
 	// Clears the used X-Attack from Player after each battle
 	usedXAttack = 0;
 }
 
+/**
+ * Implemented to allow the Player to add an X-Defense to
+ * usedXDefense during battle, increasing his defense
+ *
+ * Implemented as part of User Story D, Req 4.0
+ *
+ * @param None
+ */
 void Player::AddXDefense() {
 	// Adds an X-Defense to the player
 	usedXDefense += 1;
@@ -500,8 +568,16 @@ void Player::AddXDefense() {
 	cout << " used an X-Defense! " << endl;
 }
 
+/**
+ * Implemented to remove all usedXDefense once a battle
+ * has concluded
+ *
+ * Implemented as part of User Story D, Req 4.0
+ *
+ * @param None
+ */
 void Player::LoseXDefense() {
-	// Clears the used X-Attack from Player after each battle
+	// Clears the used X-Defense from Player after each battle
 	usedXAttack = 0;
 }
 
