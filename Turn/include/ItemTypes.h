@@ -8,7 +8,8 @@ enum ITEMTYPE
 	BOMB,
 	POTION,
 	WHETSTONE,
-	XATTACK
+	XATTACK,
+	XDEFENSE
 };
 
 #endif
