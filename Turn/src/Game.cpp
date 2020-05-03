@@ -125,6 +125,7 @@ void Game::SetPlayerData(){
 	* potions
 	* whetstones
 	* x-attack
+	* x-defense
 	* weaponstrength
 	* coins
 	*/

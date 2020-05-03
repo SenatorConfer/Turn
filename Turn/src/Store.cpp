@@ -15,6 +15,7 @@ const unsigned short bombCost = 100;
 const unsigned short potionCost = 150;
 const unsigned short whetstoneCost = 20;
 const unsigned short xattackCost = 200;
+const unsigned short xdefenseCost = 200;
 
 //Messages
 const string lowCoinsMessage = " Insufficient Coins !";
@@ -46,6 +47,15 @@ void Store::StoreFront(Player* _Player) {
 		option = input();
 		cout << endl << " ";
 		if (option == STORETYPE::BUY) {
+			/*!
+				This case works toward User Story A.
+				Req 1.0 - An store from the existing code has been edited to allow for more items
+				Req 1.0.1 - The store already used in-game coins to make purchases
+				Req 1.0.2 - Changed to allow for more than a single item per transaction, accounting for the prices
+				Req 1.0.3 - This code is pre-existing. I simply changed it to account for multiple potential items
+				I chose this way of implementation because it builds upon the previous store functionality and speeds 
+				up the purchasing process.
+			*/
 			do
 			{
 				ClearScreen();
@@ -59,13 +69,14 @@ void Store::StoreFront(Player* _Player) {
 				cout << " 2) Bomb\t\t " << bombCost << endl;
 				cout << " 3) Potion\t\t " << potionCost << endl;
 				cout << " 4) Whetstone\t\t " << whetstoneCost << endl;
-				cout << " 5) X-Attack\t\t " << xattackCost << endl << endl;
+				cout << " 5) X-Attack\t\t " << xattackCost << endl;
+				cout << " 6) X-Defense\t\t " << xdefenseCost << endl << endl;
 				cout << " 0) Exit" << endl << endl;
 				cout << " ---------------------------------- " << endl << endl;
 				cout << " What do you want to buy today?" << endl << endl << " ";
 				choice = input();
 				cout << endl << " ";
-				if (choice > 0 && choice < 6) {
+				if (choice > 0 && choice < 7) {
 					cout << choice << endl;
 					cout << " How many do you want to buy today?" << endl << endl << " ";
 					amount = input();
@@ -180,6 +191,26 @@ void Store::StoreFront(Player* _Player) {
 					}
 					Sleep(SLEEP_MS);
 					break;
+				case ITEMTYPE::XDEFENSE:
+					if (amount == 0) {
+						cout << invalidAmount << endl;
+					}
+					else if (coins < (xdefenseCost * amount)) {
+						cout << amount << lowCoinsMessage << endl;
+					}
+					else {
+						cout << amount << " X-Defense";
+						if (amount > 1) {
+							cout << "s";
+						}
+						cout << " purchased !" << endl;
+						for (int i = 0; i < amount; i++) {
+							_Player->AddStoreItemToInventory(ITEMTYPE::XDEFENSE);
+							_Player->LoseCoins(xdefenseCost);
+						}
+					}
+					Sleep(SLEEP_MS);
+					break;
 				case 0://Exit Section
 					break;
 				default:
@@ -189,7 +220,16 @@ void Store::StoreFront(Player* _Player) {
 			} while (choice);
 		}
 		else if (option == STORETYPE::SELL) {
-			do
+		/*!
+				This case works toward User Story A.
+				Req 1.1 - Using the existing store, I created a separate section for selling
+				Req 1.1.1 - The store already used in-game coins to make purchases, so I added a selling feature too.
+				Req 1.1.2 - Changed from the initial store to allow for more than a single item per transaction, accounting for the prices.
+				Req 1.1.3 - Done so that a Player cannot sell an item he does not have.
+				I chose this way of implementation because it builds upon the previous store functionality 
+				and only adds a new section, using some of the existing code as a basis.
+			*/
+		do
 			{
 				ClearScreen();
 				coins = _Player->GetCoins();
@@ -202,13 +242,14 @@ void Store::StoreFront(Player* _Player) {
 				cout << " 2) Bomb\t\t " << bombCost * .5 << endl;
 				cout << " 3) Potion\t\t " << potionCost * .5 << endl;
 				cout << " 4) Whetstone\t\t " << whetstoneCost * .5 << endl;
-				cout << " 5) X-Attack\t\t " << xattackCost * .5 << endl << endl;
+				cout << " 5) X-Attack\t\t " << xattackCost * .5 << endl;
+				cout << " 6) X-Defense\t\t " << xdefenseCost * .5 << endl << endl;
 				cout << " 0) Exit" << endl << endl;
 				cout << " ---------------------------------- " << endl << endl;
 				cout << " What do you want to sell today?" << endl << endl << " ";
 				choice = input();
 				cout << endl << " ";
-				if (choice > 0 && choice < 6) {
+				if (choice > 0 && choice < 7) {
 					cout << choice << endl;
 					cout << " How many do you want to sell today?" << endl << endl << " ";
 					amount = input();
@@ -312,6 +353,26 @@ void Store::StoreFront(Player* _Player) {
 					}
 					else {
 						cout << amount << " X-Attack";
+						if (amount > 1) {
+							cout << "s";
+						}
+						cout << " sold !" << endl;
+						for (int i = 0; i < amount; i++) {
+							_Player->RemoveStoreItemFromInventory(ITEMTYPE::XATTACK);
+							_Player->AddCoins(xattackCost * .5);
+						}
+					}
+					Sleep(SLEEP_MS);
+					break;
+				case ITEMTYPE::XDEFENSE:
+					if (amount == 0) {
+						cout << invalidAmount << endl;
+					}
+					else if (_Player->GetItem(ITEMTYPE::XDEFENSE) < amount) {
+						cout << lowItemMessage << endl;
+					}
+					else {
+						cout << amount << " X-Defense";
 						if (amount > 1) {
 							cout << "s";
 						}
