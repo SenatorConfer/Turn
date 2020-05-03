@@ -2,7 +2,37 @@
 
 ## User Story A Requirements:
 
+Req. 1.0 - "The game shall include a store that allows users to purchase items"
 
+The git repository already came with a store. However, to test this, I used the option associated with the store in the main menu to make sure I could select it.
+
+Req. 1.0.1 - "The game shall include a store that allows user to purchase in-game items with in-game coins"
+
+The git repository already came with a store that used in-game coins. However, to test this, I purchased random items to make sure the purchase was correct.
+
+Req. 1.0.2 - "The game shall include a store that allows a user to purchase 1-9 of a single item per transaction"
+
+The way to confirm this was to purchase a random amount of a random item multiple times. Each time, assuming they met Req. 1.0.3, the system added the amount of the item requested to the inventory while reducing the number of coins in the inventory.
+
+Req. 1.0.3 - "The game shall not allow a user to purchase an item if they do not have the necessary amount of coins"
+
+The git repository already came with a store that did not allow an item purchase without necessary coins. However, to test this, I purchased a random item a random amount of times (where the final price exceeded coin count) to make sure the feature was implemented correctly.
+
+Req. 1.1 - "The game shall include a store that allows users to sell items"
+
+The way to confirm that this worked was to choose the Store option from the main menu and choose the Sell option from the Store.
+
+Req. 1.1.1 - "The game shall include a store that allows users to sell in-game items for in-game coins"
+
+The way to confirm this was to sell a random item. Each time, assuming they met Req. 1.1.3, the system reduced the amount of the item sold from the inventory while increasing the number of coins in the inventory.
+
+Req. 1.1.2 (Jonathan): The game shall include a store that allows users to sell 1-9 of a single item per transaction
+
+The way to confirm this was to sell a random amount of a random item multiple times. Each time, assuming they met Req. 1.1.3, the system reduced the amount of the item sold from the inventory while increasing the number of coins in the inventory.
+
+Req. 1.1.3 (Jonathan): The game shall not allow a user to sell an item if they do not have the necessary amount of item(s) to sell
+
+To test this, I sold a random item a random amount of times (where the items sold exceeded items in inventory) to make sure the feature was implemented correctly.
 
 ## User Story B Requirements:
 
@@ -51,7 +81,21 @@ with additional arrows unlike the other classes.
 
 ## User Story D Requirements:
 
+Req. 4.0 - "The game shall implement an armor system"
 
+This can be confirmed by purchasing an X-Defense from the Store.
+
+Req. 4.0.1 - "The game shall implement an armor system that reduces damage dealt to the Player"
+
+The way to confirm this was, while having an X-Defense in the inventory, use it during battle to reduce an Enemy's damage to the Player.
+
+Req. 4.1 - "The X-Attack system shall be an option the player can choose during a fight to increase damage."
+
+This can be confirmed by purchasing an X-Attack from the Store.
+
+Req. 4.1.1 - "The game shall implement an X-Attack System that increases the damage dealt from a Player for a brief time during battle"
+
+The way to confirm this was, while having an X-Attack in the inventory, use it during battle to increase the Player's damage to an Enemy.
 
 ## User Story E Requirements:
 
@@ -64,9 +108,3 @@ Req 5.0.1 - "The "Metapod"-type enemy shall have a high defense but no attack"
 
 Once the "Metapod" has appeared as the enemy during the battle it will only have the ability to heal and deal no damage to the player.
 This was done by restricting the case to only being able to heal.
-
-
-## User Story F Requirements:
-
-
-
